@@ -8,7 +8,7 @@ This module deploys a kubernetes cluster, installs kubectl and creates a context
 
 Execute the following command from the `Arc-PX-VMware-Faststart/kubernetes` directory
 ```
-terraform apply -target=module.kubernetes_cluster --auto-approve 
+terraform apply -auto-approve 
 ```
 ### Example: Applying the configuration
 
@@ -24,26 +24,11 @@ terraform workspace new arc
 terraform workspace select arc
 ```
 
-3. Edit the `modules/kubernetes_cluster/variables.tf` file, note that the top level of the map object for the `node_hosts` variable needs to be
-   labelled with the name of the workspace, if this this is arc, you will require:
-```
-variable "node_hosts" {
-  type = map(map(object({
-      name          = string
-      compute_node  = bool
-      etcd_instance = string
-      ipv4_address  = string
-    })))
-  default = {
-    *arc* = {
-.
-.
-.
-```
+3. Create a `terraform.tfvars` with the value of the `node_hosts` variable specified per the example provided in the variables section of the document below.
 
 4. Apply the configuration:
 ```
-terraform apply -target=module.kubernetes_cluster
+terraform apply -auto-approve
 ```
 
 The example node_hosts variable provide below contains a block of hosts for an **arc** cluster and a block of hosts for a **bdc** cluster, creating
@@ -57,7 +42,7 @@ terraform workspace select arc
 ```
 followed by:
 ```
-terraform apply -target=module.kubernetes_cluster
+terraform apply -auto-approve
 ```
 
 Create a **bdc** cluster, per the block of hosts labelled with bdc, would be achieved via:
@@ -70,7 +55,7 @@ terraform workspace select bdc
 ```
 followed by:
 ```
-terraform apply -target=module.kubernetes_cluster
+terraform apply -auto-approve
 ```
 
 **Note**
@@ -81,7 +66,7 @@ If the current workspace does not correspond to a label in the `node_hosts` vari
 ## Destroy
 
 ```
-terraform destroy -target=module.kubernetes_cluster --auto-approve 
+terraform destroy -auto-approve 
 ```
 
 ### Example: Destroying the configuration
@@ -92,7 +77,7 @@ terraform workspace select arc
 ```
 2. Destroy the configuration:
 ```
-terraform destroy -target=module.kubernetes_cluster
+terraform destroy -auto-approve
 ```
 
 # Dependencies
@@ -107,82 +92,74 @@ The minimum set of variables that need to be configured consists of those with n
 
 | Name                        | Data type | Description / Notes                                                 | Mandatory (Y/N) | Default Value                   |
 |-----------------------------|-----------|---------------------------------------------------------------------|-----------------|---------------------------------|
-| kubernetes_version          | string    | Set to true if the Portworx spec has been created with              |        Y        | 1.19.7                          |
+| kubernetes_version          | string    | Set to true if the Portworx spec has been created with              |        Y        | 1.22.5                          |
 
 
-Node host configuration information is specified in the following variable:
+Specify the node host configuration information as follows in a terraform.vars file:
 ```
-variable "node_hosts" {
-  type = map(map(object({
-      name          = string
-      compute_node  = bool
-      etcd_instance = string
-      ipv4_address  = string
-    })))
-  default = {
-    arc = {
-      control1 = {
-        name          = "z-ca-arc-control1"
-        compute_node  = false
-        etcd_instance = "etcd1"
-        ipv4_address  = "10.123.456.01"
-      },
-      control2 =  {
-        name          = "z-ca-arc-control2"
-        compute_node  = false
-        etcd_instance = "etcd2"
-        ipv4_address  = "10.123.456.02"
-      },
-      compute1 = {
-        name          = "z-ca-arc-compute1"
-        compute_node  = true
-        etcd_instance = "etcd3"
-        ipv4_address  = "10.123.456.03"
-      },
-      compute2 = {
-        name          = "z-ca-arc-compute2"
-        compute_node  = true
-        etcd_instance = ""
-        ipv4_address  = "10.123.456.04"
-      },
-      compute3 = {
-        name          = "z-ca-arc-compute3"
-        compute_node  = true
-        etcd_instance = ""
-        ipv4_address  = "10.123.456.05"
-      }
+node_hosts = {
+  arc = {
+    control1 = {
+      name          = "z-ca-arc-control1"
+      compute_node  = false
+      etcd_instance = "etcd1"
+      ipv4_address  = "10.123.456.01"
     },
-    bdc = {
-      control1 = {
-        name          = "z-ca-bdc-control1"
-        compute_node  = false
-        etcd_instance = "etcd1"
-        ipv4_address  = "10.123.456.06"
-      },
-      control2 =  {
-        name          = "z-ca-bdc-control2"
-        compute_node  = false
-        etcd_instance = "etcd2"
-        ipv4_address  = "10.123.456.07"
-      },
-      compute1 = {
-        name          = "z-ca-bdc-compute1"
-        compute_node  = true
-        etcd_instance = "etcd3"
-        ipv4_address  = "10.123.456.08"
-      },
-      compute2 = {
-        name          = "z-ca-bdc-compute2"
-        compute_node  = true
-        etcd_instance = ""
-        ipv4_address  = "10.123.456.09"
-      },
-      compute3 = {
-        name          = "z-ca-bdc-compute3"
-        compute_node  = true
-        etcd_instance = ""
-        ipv4_address  = "10.123.456.10"
-      }
+    control2 =  {
+      name          = "z-ca-arc-control2"
+      compute_node  = false
+      etcd_instance = "etcd2"
+      ipv4_address  = "10.123.456.02"
+    },
+    compute1 = {
+      name          = "z-ca-arc-compute1"
+      compute_node  = true
+      etcd_instance = "etcd3"
+      ipv4_address  = "10.123.456.03"
+    },
+    compute2 = {
+      name          = "z-ca-arc-compute2"
+      compute_node  = true
+      etcd_instance = ""
+      ipv4_address  = "10.123.456.04"
+    },
+    compute3 = {
+      name          = "z-ca-arc-compute3"
+      compute_node  = true
+      etcd_instance = ""
+      ipv4_address  = "10.123.456.05"
+    }
+  },
+  bdc = {
+    control1 = {
+      name          = "z-ca-bdc-control1"
+      compute_node  = false
+      etcd_instance = "etcd1"
+      ipv4_address  = "10.123.456.06"
+    },
+    control2 =  {
+      name          = "z-ca-bdc-control2"
+      compute_node  = false
+      etcd_instance = "etcd2"
+      ipv4_address  = "10.123.456.07"
+    },
+    compute1 = {
+      name          = "z-ca-bdc-compute1"
+      compute_node  = true
+      etcd_instance = "etcd3"
+      ipv4_address  = "10.123.456.08"
+    },
+    compute2 = {
+      name          = "z-ca-bdc-compute2"
+      compute_node  = true
+      etcd_instance = ""
+      ipv4_address  = "10.123.456.09"
+    },
+    compute3 = {
+      name          = "z-ca-bdc-compute3"
+      compute_node  = true
+      etcd_instance = ""
+      ipv4_address  = "10.123.456.10"
     }
   }
 }
@@ -193,4 +170,4 @@ variable "node_hosts" {
 - The example provided will lead to the creation of a kubernetes cluster with three etcd instance, two control plane nodes and three worker (or compute) nodes, to reuse
   this simply provide the actual IP addresses for your servers in place of the 192.168.123.x addresses used in the example
 
-[Back to root module](https://github.com/PureStorage-OpenConnect/arc-px-vmware-faststart/blob/main/README.md)
+[Back to root module](https://github.com/chrisadkin/arc-px-vmware-faststart/blob/main/README.md)
