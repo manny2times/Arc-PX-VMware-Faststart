@@ -26,14 +26,14 @@ terraform apply will fail.
 
 Execute the following command from the `Arc-PX-VMware-Faststart/vmware_vm_pool` directory
 ```
-terraform apply -target=module.virtual_machine --auto-approve 
+terraform apply --auto-approve 
 ```
 
 ## Destroy
 
 Execute the following command from the `Arc-PX-VMware-Faststart/vmware_vm_pool` directory
 ```
-terraform destroy -target=module.virtual_machine --auto-approve 
+terraform destroy --auto-approve 
 ```
 # Dependencies
 
@@ -252,89 +252,75 @@ The minimum set of variables that need to be configured consists of those with n
 | vm_domain                   | string    |                                                                 |        Y        |                       |
 | vm_linked_clone             | boolean   | Specifies whether a virtual machine shares disk(s) with a parent|        Y        | false                 |
 
-The configuration information for the virtual machines created by this module is stored in the `virtual_machines` variable:
+The configuration information for the virtual machines created by this module is stored in the `virtual_machines` variable, specify this in a terraform.tfvars file as follows:
 ```
-variable "virtual_machines" {
-  type = map(map(object({
-      name          = string
-      compute_node  = bool
-      ipv4_address  = string
-      ipv4_netmask  = string
-      ipv4_gateway  = string
-      dns_server    = string
-      ram           = number
-      logical_cpu   = number
-      os_disk_size  = number
-      px_disk_size  = number
-    })))
-  default = {
-    "bdc" = {
-      "z-ca-bdc-control1" = {
-        name          = "z-ca-bdc-control1"
-        compute_node  = false
-        ipv4_address  = "192.168.123.88"
-        ipv4_netmask  = "22"
-        ipv4_gateway  = "192.168.123.1"         
-        dns_server    = "192.168.123.2"
-        ram           = 8192
-        logical_cpu   = 4 
-        os_disk_size  = 120
-        px_disk_size  = 0
-      },
-      "z-ca-bdc-control2" =  {
-        name          = "z-ca-bdc-control2"
-        compute_node  = false
-        ipv4_address  = "192.168.123.89"
-        ipv4_netmask  = "22"
-        ipv4_gateway  = "192.168.123.1"
-        dns_server    = "192.168.123.2"
-        ram           = 8192
-        logical_cpu   = 4
-        os_disk_size  = 120
-        px_disk_size  = 0
-      },
-      "z-ca-bdc-compute1" = {
-        name          = "z-ca-bdc-compute1"
-        compute_node  = true
-        ipv4_address  = "192.168.123.90"
-        ipv4_netmask  = "22"
-        ipv4_gateway  = "192.168.123.1
-        dns_server    = "192.168.123.2"
-        ram           = 73728
-        logical_cpu   = 12
-        os_disk_size  = 120
-        px_disk_size  = 120 
-      },
-      "z-ca-bdc-compute2" = {
-        name          = "z-ca-bdc-compute2"         
-        compute_node  = true
-        ipv4_address  = "192.168.123.91
-        ipv4_netmask  = "22
-        ipv4_gateway  = "192.168.123.1"
-        dns_server    = "192.168.123.2"
-        ram           = 73728
-        logical_cpu   = 12
-        os_disk_size  = 120
-        px_disk_size  = 120
-      },
-      "z-ca-bdc-compute3" = {
-        name          = "z-ca-bdc-compute3"
-        compute_node  = true
-        ipv4_address  = "192.168.123.92"         
-        ipv4_netmask  = "22"
-        ipv4_gateway  = "192.168.123.1"
-        dns_server    = "192.168.123.2"
-        ram           = 73728 
-        logical_cpu   = 12
-        os_disk_size  = 120
-        px_disk_size  = 120
-      }
+virtual_machines = {
+  "bdc" = {
+    "z-ca-bdc-control1" = {
+      name          = "z-ca-bdc-control1"
+      compute_node  = false
+      ipv4_address  = "192.168.123.88"
+      ipv4_netmask  = "22"
+      ipv4_gateway  = "192.168.123.1"         
+      dns_server    = "192.168.123.2"
+      ram           = 8192
+      logical_cpu   = 4 
+      os_disk_size  = 120
+      px_disk_size  = 0
     },
-    "arc" = {
-      .
-      .
-      .
+    "z-ca-bdc-control2" =  {
+      name          = "z-ca-bdc-control2"
+      compute_node  = false
+      ipv4_address  = "192.168.123.89"
+      ipv4_netmask  = "22"
+      ipv4_gateway  = "192.168.123.1"
+      dns_server    = "192.168.123.2"
+      ram           = 8192
+      logical_cpu   = 4
+      os_disk_size  = 120
+      px_disk_size  = 0
+    },
+    "z-ca-bdc-compute1" = {
+      name          = "z-ca-bdc-compute1"
+      compute_node  = true
+      ipv4_address  = "192.168.123.90"
+      ipv4_netmask  = "22"
+      ipv4_gateway  = "192.168.123.1
+      dns_server    = "192.168.123.2"
+      ram           = 73728
+      logical_cpu   = 12
+      os_disk_size  = 120
+      px_disk_size  = 120 
+    },
+    "z-ca-bdc-compute2" = {
+      name          = "z-ca-bdc-compute2"         
+      compute_node  = true
+      ipv4_address  = "192.168.123.91
+      ipv4_netmask  = "22
+      ipv4_gateway  = "192.168.123.1"
+      dns_server    = "192.168.123.2"
+      ram           = 73728
+      logical_cpu   = 12
+      os_disk_size  = 120
+      px_disk_size  = 120
+    },
+    "z-ca-bdc-compute3" = {
+      name          = "z-ca-bdc-compute3"
+      compute_node  = true
+      ipv4_address  = "192.168.123.92"         
+      ipv4_netmask  = "22"
+      ipv4_gateway  = "192.168.123.1"
+      dns_server    = "192.168.123.2"
+      ram           = 73728 
+      logical_cpu   = 12
+      os_disk_size  = 120
+      px_disk_size  = 120
     }
+  },
+  "arc" = {
+    .
+    .
+    .
   }
 }
 ```
