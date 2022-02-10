@@ -1,79 +1,76 @@
-variable "azdata_username" {
-  description = "Azdata username"
-  type        = string
-  default     = "azuser"
-}
-
-variable "AZDATA_PASSWORD" {
-  description = "azdata password is set via an environment variable, export TF_VAR_AZDATA_PASSWORD=<password goes here>"
-  type        = string
-}
-
-variable "arc_data_namespace" {
+variable "namespace" {
   description = "Kubernetes namespace for Azure Arc for Data Services controller"
   type        = string
-  default     = "arc-ds-controller"
+  default     = "arc"
 }
 
-variable "use_load_balancer" {
-  description = "Use LoadBalancer services if set to true, other use NodePort"
-  default     = true
+variable "metrics_ui_admin_user" {
+  description = "Metrics UI admin user username"
+  type        = string
+  sensitive   = true 
 }
 
-variable "arc_data_connectivity_mode" {
-  description = "Mode for data controller connectivity with Azure (direct/indirect)"
+variable "metrics_ui_admin_password" {
+  description = "Metrics UI admin user password"
+  type        = string
+  sensitive   = true 
+}
+
+variable "logs_ui_admin_user" {
+  description = "Logs UI admin user username"
+  type        = string
+  sensitive   = true 
+}
+
+variable "logs_ui_admin_password" {
+  description = "Logs UI admin user password"
+  type        = string
+  sensitive   = true 
+}
+
+variable "infrastructure" {
+  description = "Infrastructure to deploy controller to, one of: alibaba, aws, azure, gcp, onpremises, other"
+  type        = string
+}
+
+variable "service_type" {
+  description = "Kubernetes service type for controller: LoadBalancer or NodePort"
+  type        = string
+  default     = "NodePort"
+}
+
+variable "connection_mode" {
+  description = "Controller connection mode: direct or indirect"
   type        = string
   default     = "indirect"
 }
 
-variable "arc_data_az_subscription_id" {
-  description = "Subscription GUID for where the data controller resource is to be created in Azure"
-  type        = string
-  default     = "ce5a3eca-e3bb-4208-86e9-ae9f675f827f"
-}
-
-variable "arc_data_resource_group" {
-  description = "Resource group group where the data controller resource is to be created in Azure"
-  type        = string
-  default     = "arc-ds-rg"
-}
-
-variable "arc_data_az_location" {
-  description = "Location where controller resource metadata will be stored in Azure"
+variable "azure_region" {
+  description = "Azure region to register controller with"
   type        = string
   default     = "eastus"
 }
 
-variable "arc_data_profile_dir" {
-  description = "Directory were Azure Arc enabled Data Services profile is created"
+variable "resource_group" {
+  description = "Resource group to create controller objects in"
   type        = string
-  default     = "ca_arc"
+  default     = "arc-ds-controller"
 }
 
-variable "arc_data_storage_class" {
-  description = "Storage class for data"
+variable "subscription_id" {
+  description = "Azure subscription id"
   type        = string
-  default     = "portworx-sc"
+  sensitive   = true
 }
 
-variable "arc_logs_storage_class" {
-  description = "Storage class for logs"
+variable "data_storage_class" {
+  description = "Storage class for metadata database data"
   type        = string
-  default     = "portworx-sc"
+  default     = "portworx-sc" 
 }
 
-variable "application_name" {
-  default     = "Azure Arc enabled Data Services"
-}
-
-variable "password_length" {
-  default     = 16
-}
-
-variable "password_special" {
-  default     = true
-}
-
-variable "password_override_special" {
-  default     = "_%@" 
+variable "logs_storage_class" {
+  description = "Storage class for metadata database tlog"
+  type        = string
+  default     = "portworx-sc" 
 }
