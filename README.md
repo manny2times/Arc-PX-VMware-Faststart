@@ -101,7 +101,7 @@ The following steps are to be performed on the same machine used to copy the pub
   - use the [px_backup](https://github.com/chrisadkin/Arc-PX-VMware-Faststart/blob/main/kubernetes_addons/modules/px_backup/README.md) module for kubernetes data protection
   
 - big_data_clusters
-  - use the [big_data_cluster](https://github.com/chrisadkin/Arc-PX-VMware-Faststart/blob/main/big_data_clusters/modules/big_data_cluster/README.md) module for deploying a big data cluster to the kubernetes cluster
+  - use the [big_data_cluster](https://github.com/chrisadkin/Arc-PX-VMware-Faststart/blob/main/azure_data_services/modules/big_data_cluster/README.md) module for deploying a big data cluster to the kubernetes cluster
 
 - azure_data_services
   - use the [azure_arc_ds_controller](https://github.com/chrisadkin/Arc-PX-VMware-Faststart/blob/main/azure_data_services/modules/azure_arc_ds_controller/README.md) module for deploying an Azure Arc enabled Data Services Controller to the kubernetes cluster
