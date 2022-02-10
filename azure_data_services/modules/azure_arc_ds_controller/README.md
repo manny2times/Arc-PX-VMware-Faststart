@@ -19,6 +19,7 @@ terraform apply -target=module.azure_arc_ds_controller --auto-approve
 Execute the following command from the `Arc-PX-VMware-Faststart/azure_data_services` directory
 ```
 terraform destroy -target=module.azure_arc_ds_controller --auto-approve 
+```
 
 # Dependencies
 
