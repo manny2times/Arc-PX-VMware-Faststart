@@ -86,4 +86,4 @@ The minimum set of variables that need to be configured consists of those with n
 
 Destroy provisioner yet be implemented for the null resource that deploys Portworx to the kubernetes cluster. 
 
-[Back to root module](https://github.com/PureStorage-OpenConnect/arc-px-vmware-faststart/blob/main/README.md)
+[Back to root module](https://github.com/chrisadkin/arc-px-vmware-faststart/blob/main/README.md)
