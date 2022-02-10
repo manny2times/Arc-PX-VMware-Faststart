@@ -31,13 +31,19 @@ terraform destroy -target=module.azure_arc_ds_controller --auto-approve
 
 The minimum set of variables that need to be configured consists of those with no default values.
 
-| Name                        | Data type | Description / Notes                                                 | Mandatory (Y/N) | Default Value                   |
-|-----------------------------|-----------|---------------------------------------------------------------------|-----------------|---------------------------------| namespace          | string    | Kubernetess namespace controller is to be deployed to               |        Y        | arc-ds-controller               |
-| connectivity_mode  | string    | Determines whether telemetry is uploaded to Azure                   |        Y        | direct                          |
-| subscription_id | string    | Azure subscription id                                               |        Y        | **No default value**            |
-| resource_group     | string    | Controller Azure resource group                                     |        Y        | arc-ds-rg                       |
-| azure_region        | string    | Location where controller resource metadata will be stored in Azure |        Y        | eastus                          | data_storage_class      | string    | Storage class for data                                              |        Y        | portworx-sc                     |
-|  logs_storage_class      | string    | Storage class for logs                                              |        Y        | portworx-sc                     | 
+| Name                        | Data type | Description / Notes                                                 | Mandatory (Y/N) | Default Value        |      
+|-----------------------------|-----------|---------------------------------------------------------------------|-----------------|----------------------|
+| namespace                   | string    | Kubernetess namespace controller is to be deployed to               |        Y        | arc                  |
+| metrics_ui_admin_user       | string    | base64 encoded username for the metrics UI                          |        Y        | **No default value** |
+| metrics_ui_admin_password   | string    | base64 encoded password for the metrics UI                          |        Y        | **No default value** |
+| logs_ui_admin_user          | string    | base64 encoded username for the logs UI                             |        Y        | **No default value** |
+| logs_ui_admin_password      | string    | base64 encoded password for the logs UI                             |        Y        | **No default value** |
+| connectivity_mode           | string    | Determines whether telemetry is uploaded to Azure                   |        Y        | indirect             |
+| subscription_id             | string    | Azure subscription id                                               |        Y        | **No default value** |           
+| resource_group              | string    | Controller Azure resource group                                     |        Y        | arc-ds-controller    |
+| azure_region                | string    | Location where controller resource metadata will be stored in Azure |        Y        | eastus               | 
+| data_storage_class          | string    | Storage class for data                                              |        Y        | portworx-sc          | 
+| logs_storage_class          | string    | Storage class for logs                                              |        Y        | portworx-sc          |
 
 # Known Issues / Limitations
 
