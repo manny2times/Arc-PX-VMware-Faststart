@@ -119,7 +119,7 @@ Subsequent stages in in the development of this work includes:
 - Deployment of Azure Data Services with load balancer endpoints
 
 # Feedback
-
+ 
 Feedback is welcome and should be submitted via the creation of issues.
 
 # Credits 
