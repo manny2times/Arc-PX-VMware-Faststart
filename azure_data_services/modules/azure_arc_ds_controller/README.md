@@ -32,24 +32,15 @@ terraform destroy -target=module.azure_arc_ds_controller --auto-approve
 The minimum set of variables that need to be configured consists of those with no default values.
 
 | Name                        | Data type | Description / Notes                                                 | Mandatory (Y/N) | Default Value                   |
-|-----------------------------|-----------|---------------------------------------------------------------------|-----------------|---------------------------------|
-| azdata_username             | string    |                                                                     |        Y        | azuser                          |     
-| AZDATA_PASSWORD             | string    | Set via TF_VAR_AZDATA_PASSWORD environment variable                 |        Y        | **No default value**            |
-| arc_data_namespace          | string    | Kubernetess namespace controller is to be deployed to               |        Y        | arc-ds-controller               |
-| arc_data_connectivity_mode  | string    | Determines whether telemetry is uploaded to Azure                   |        Y        | direct                          |
-| arc_data_az_subscription_id | string    | Azure subscription id                                               |        Y        | **No default value**            |
-| arc_data_resource_group     | string    | Controller Azure resource group                                     |        Y        | arc-ds-rg                       |
-| arc_data_az_location        | string    | Location where controller resource metadata will be stored in Azure |        Y        | eastus                          |
-| arc_data_profile_dir        | string    | Directory where Azure Arc enabled Data Services profile is created  |        Y        | ca_arc                          | 
-| arc_data_storage_class      | string    | Storage class for data                                              |        Y        | portworx-sc                     |
-| arc_logs_storage_class      | string    | Storage class for logs                                              |        Y        | portworx-sc                     |
-| application_name            | string    | Azure Arc enabled Data Services                                     |        Y        | Azure Arc enabled Data Services |
-| password_length             | integer   | Length of password to create for service principal                  |        Y        | 16                              |
-| password_special            | boolean   |                                                                     |        Y        | true                            |
-| password_override_special   | string    |                                                                     |        Y        | \_\%\@                          | 
+|-----------------------------|-----------|---------------------------------------------------------------------|-----------------|---------------------------------| namespace          | string    | Kubernetess namespace controller is to be deployed to               |        Y        | arc-ds-controller               |
+| connectivity_mode  | string    | Determines whether telemetry is uploaded to Azure                   |        Y        | direct                          |
+| subscription_id | string    | Azure subscription id                                               |        Y        | **No default value**            |
+| resource_group     | string    | Controller Azure resource group                                     |        Y        | arc-ds-rg                       |
+| azure_region        | string    | Location where controller resource metadata will be stored in Azure |        Y        | eastus                          | data_storage_class      | string    | Storage class for data                                              |        Y        | portworx-sc                     |
+|  logs_storage_class      | string    | Storage class for logs                                              |        Y        | portworx-sc                     | 
 
 # Known Issues / Limitations
 
 Destroy provisioner yet be implemented for the null resource that calls azdata in order to create the controller. 
 
-[Back to root module](https://github.com/PureStorage-OpenConnect/arc-px-vmware-faststart/blob/main/README.md)
+[Back to root module](https://github.com/chrisadkin/arc-px-vmware-faststart/blob/main/README.md)
