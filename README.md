@@ -31,7 +31,7 @@ virtualized via VMware. The "Full stack" solution involves the deployment of fou
 - [big_data_cluster](https://github.com/chrisadkin/Arc-PX-VMware-Faststart/blob/main/big_data_clusters/modules/big_data_cluster/README.md) module for deploying
   a big data cluster to a kubernetes cluster.
   
-- [arc_ds_controller](https://github.com/chrisadkin/Arc-PX-VMware-Faststart/blob/main/azure_arc_data_services/modules/arc_ds_controller/README.md) module
+- [arc_ds_controller](https://github.com/chrisadkin/Arc-PX-VMware-Faststart/blob/main/azure_data_services/modules/arc_ds_controller/README.md) module
   for deploying an Azure Arc enabled Data Services Controller to a Kubernetes cluster.
 
 - [arc_sql_mi](https://github.com/chrisadkin/Arc-PX-VMware-Faststart/blob/main/azure_arc_data_services/modules/arc_sql_mi/README.md) module
