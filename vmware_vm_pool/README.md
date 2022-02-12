@@ -213,9 +213,9 @@ network:
 `sudo apt-get install cgroup-lite`
 
 2. Set the cgroup to V1 in the /etc/default/grub file 
-
+```
 GRUB_CMDLINE_LINUX="systemd.unified_cgroup_hierarchy=0"
-
+```
 3. Issue:
 
 `sudo update-grub`
@@ -230,7 +230,7 @@ GRUB_CMDLINE_LINUX="systemd.unified_cgroup_hierarchy=0"
 
 6. Check that cgroup has been set to version V1:
 
-`sudo update-initramfs -u`
+`stat -c %T -f /sys/fs/cgroup`
 
 this should return:
 
