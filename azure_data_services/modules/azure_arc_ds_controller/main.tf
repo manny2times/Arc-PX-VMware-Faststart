@@ -17,8 +17,6 @@ provider "kubernetes" {
   config_path = "~/.kube/config"
 }
 
-provider kubectl {}
-
 resource "kubernetes_namespace" "controller_namespace" {
   metadata {
     name = var.namespace

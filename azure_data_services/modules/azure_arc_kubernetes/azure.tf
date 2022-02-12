@@ -47,7 +47,6 @@ resource "azurerm_role_assignment" "monitoring_metrics_publisher" {
 
 resource "azurerm_resource_group" "arc_rg" {
   provider = azurerm.azure_rm
-
   name     = var.resource_group 
   location = var.azure_region 
 }
