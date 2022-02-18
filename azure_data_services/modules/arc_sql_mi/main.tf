@@ -17,8 +17,6 @@ provider "kubernetes" {
   config_path = "~/.kube/config"
 }
 
-provider kubectl {}
-
 resource "kubernetes_secret" "arc_sql_mi_login_secret" {
   metadata {
     name = "${var.instance_name}-login-secret"

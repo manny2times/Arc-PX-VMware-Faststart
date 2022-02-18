@@ -12,13 +12,21 @@ YAML
   ]
 }
 
+resource "time_sleep" "wait_5_seconds" {
+  create_duration = "5s"
+
+  depends_on = [
+    kubectl_manifest.sa_arc_controller
+  ]
+}
+
 resource "kubectl_manifest" "arc_dc" {
   wait = true
   yaml_body = <<YAML
 apiVersion: arcdata.microsoft.com/v2
 kind: DataController
 metadata:
-  namespace: arc 
+  namespace: ${var.namespace} 
   generation: 1
   name: arc-dc
 spec:
@@ -28,7 +36,7 @@ spec:
     serviceAccount: sa-arc-controller
   docker:
     imagePullPolicy: Always
-    imageTag: v1.2.0_2021-12-15
+    imageTag: ${var.image_tag} 
     registry: mcr.microsoft.com
     repository: arcdata
   infrastructure: ${var.infrastructure} 
@@ -65,6 +73,6 @@ spec:
 YAML
 
   depends_on = [
-    kubectl_manifest.sa_arc_controller
+    time_sleep.wait_5_seconds 
   ]
 }

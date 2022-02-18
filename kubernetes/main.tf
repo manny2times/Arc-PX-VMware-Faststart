@@ -27,7 +27,7 @@ terraform {
 }
 
 provider "kubernetes" {
-  config_path    = "~/.kube/config"
+  config_path        = "~/.kube/config"
 }
 
 provider "helm" {
@@ -36,12 +36,21 @@ provider "helm" {
   }
 }
 
+module "kubernetes_cluster" {
+  source = "./modules/kubernetes_cluster"
+  container_manager  = var.container_manager
+  node_hosts         = var.node_hosts
+  kubernetes_version = var.kubernetes_version
+}
+
 module "px_store" {
   source = "./modules/px_store"
 }
 
 module "metallb" {
   source = "./modules/metallb"
+  helm_chart_version = var.helm_chart_version
+  ip_pool_ranges     = var.ip_pool_ranges
 }
 
 module "px_backup" {

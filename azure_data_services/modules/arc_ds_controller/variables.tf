@@ -1,7 +1,6 @@
 variable "namespace" {
   description = "Kubernetes namespace for Azure Arc for Data Services controller"
   type        = string
-  default     = "arc"
 }
 
 variable "metrics_ui_admin_user" {
@@ -28,6 +27,11 @@ variable "logs_ui_admin_password" {
   sensitive   = true 
 }
 
+variable "image_tag" {
+  description = "Controller container image tag"
+  type        = string
+}
+
 variable "infrastructure" {
   description = "Infrastructure to deploy controller to, one of: alibaba, aws, azure, gcp, onpremises, other"
   type        = string
@@ -36,25 +40,21 @@ variable "infrastructure" {
 variable "service_type" {
   description = "Kubernetes service type for controller: LoadBalancer or NodePort"
   type        = string
-  default     = "NodePort"
 }
 
 variable "connection_mode" {
   description = "Controller connection mode: direct or indirect"
   type        = string
-  default     = "indirect"
 }
 
 variable "azure_region" {
   description = "Azure region to register controller with"
   type        = string
-  default     = "eastus"
 }
 
 variable "resource_group" {
   description = "Resource group to create controller objects in"
   type        = string
-  default     = "arc-ds-controller"
 }
 
 variable "subscription_id" {
@@ -66,11 +66,9 @@ variable "subscription_id" {
 variable "data_storage_class" {
   description = "Storage class for metadata database data"
   type        = string
-  default     = "portworx-sc" 
 }
 
 variable "logs_storage_class" {
   description = "Storage class for metadata database tlog"
   type        = string
-  default     = "portworx-sc" 
 }

@@ -1,10 +1,10 @@
 variable "secret_username" {
-  type    = "string"
+  type    = string
   default = "c2EK"
 }
 
 variable "secret_password" {
-  type    = "string"
+  type    = string
   default = "UEBzc3cwcmQK"
 }
 
