@@ -7,13 +7,13 @@ virtualized via VMware. The "Full stack" solution involves the deployment of fou
   virtual machines to underpin a Kubernetes cluster on, this requires that an Ubuntu 18.04 virtual machine template is created, as detailed in the instructions provided
   in this documentation. 
 
-- [kubernetes_cluster](https://github.com/chrisadkin/Arc-PX-VMware-Faststart/blob/main/kubernetes_cluster/README.md) module for creating am 
+- [kubernetes_cluster](https://github.com/chrisadkin/Arc-PX-VMware-Faststart/blob/main/kubernetes/modules/kubernetes_cluster/README.md) module for creating am 
   Kubernetes cluster.
   
-- [metallb](https://github.com/chrisadkin/Arc-PX-VMware-Faststart/blob/main/kubernetes_addons/modules/metallb/README.md) for deploying a software load balancer to a
+- [metallb](https://github.com/chrisadkin/Arc-PX-VMware-Faststart/blob/main/kubernetes/modules/metallb/README.md) for deploying a software load balancer to a
   Kubernetes cluster in order to facilitate LoadBalancer services.
 
-- [px_store](https://github.com/chrisadkin/Arc-PX-VMware-Faststart/blob/main/kubernetes_addons/modules/px_store/README.md) module for deploying the Portworx 
+- [px_store](https://github.com/chrisadkin/Arc-PX-VMware-Faststart/blob/main/kubernetes/modules/px_store/README.md) module for deploying the Portworx 
   storage platform to a Kubernetes cluster. Portworx PX Store is a 100% software defined Kubernetes storage solution that can deployed to Red Hat OpenShift, Kubernetes on-
   premises, Google Anthos, AKS, EKS or GKE. 
   **Note that [Portworx Essentials](https://docs.portworx.com/concepts/portworx-essentials/) - which PX Store comes with, is free to use.**
@@ -31,7 +31,7 @@ virtualized via VMware. The "Full stack" solution involves the deployment of fou
 - [big_data_cluster](https://github.com/chrisadkin/Arc-PX-VMware-Faststart/blob/main/big_data_clusters/modules/big_data_cluster/README.md) module for deploying
   a big data cluster to a kubernetes cluster.
   
-- [arc_ds_controller](https://github.com/chrisadkin/Arc-PX-VMware-Faststart/blob/main/azure_data_services/modules/azure_arc_ds_controller/README.md) module
+- [arc_ds_controller](https://github.com/chrisadkin/Arc-PX-VMware-Faststart/blob/main/azure_data_services/modules/arc_ds_controller/README.md) module
   for deploying an Azure Arc enabled Data Services Controller to a Kubernetes cluster.
 
 - [arc_sql_mi](https://github.com/chrisadkin/Arc-PX-VMware-Faststart/blob/main/azure_arc_data_services/modules/arc_sql_mi/README.md) module
