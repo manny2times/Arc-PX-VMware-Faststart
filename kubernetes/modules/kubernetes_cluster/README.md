@@ -80,4 +80,4 @@ variable "node_hosts" {
 
 A destroy provisioner is yet be implemented for the null resource that deploys the kubernetes cluster. 
 
-[Back to root module](https://github.com/PureStorage-OpenConnect/arc-px-vmware-faststart/blob/main/README.md)
+[Back to root module](https://github.com/chrisadkin/arc-px-vmware-faststart/blob/main/README.md)
