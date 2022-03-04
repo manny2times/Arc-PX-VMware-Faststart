@@ -3,7 +3,7 @@
 This repository contains terraform configurations for deploying SQL Server 2019 Big Data Clusters and Azure Arc Enabled Data Services Controllers to infrastructure 
 virtualized via VMware. The "Full stack" solution involves the deployment of four terraform configurations:
 
-- [vmware_vm_pool](https://github.com/chrisadkin/Arc-PX-VMware-Faststart/blob/main/vmware_vm_pool/README.md) module for creating 
+- [vmware_vm_pool](https://github.com/chrisadkin/Arc-PX-VMware-Faststart/blob/main/vmware_vm_pool/README.md) configuration for creating 
   virtual machines to underpin a Kubernetes cluster on, this requires that an Ubuntu 18.04 virtual machine template is created, as detailed in the instructions provided
   in this documentation. 
 
