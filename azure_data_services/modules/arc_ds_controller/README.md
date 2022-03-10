@@ -15,7 +15,7 @@ terraform apply -target=module.azure_arc_ds_controller --auto-approve
 
 Execute the following command from the `Arc-PX-VMware-Faststart/azure_data_services` directory
 ```
-terraform destroy -target=module.azure_arc_ds_controller --auto-approve 
+terraform destroy -target=module.arc_ds_controller --auto-approve 
 ```
 
 # Dependencies
@@ -27,7 +27,7 @@ terraform destroy -target=module.azure_arc_ds_controller --auto-approve
 
 # Variables
 
-The minimum set of variables that need to be configured consists of those with no default values.
+The following variable values should be specified in a ```terraform.tfvars``` file in the ```azure_data_services``` directory:
 
 | Name                        | Data type | Description / Notes                                                 | Mandatory (Y/N) | Default Value        |      
 |-----------------------------|-----------|---------------------------------------------------------------------|-----------------|----------------------|
