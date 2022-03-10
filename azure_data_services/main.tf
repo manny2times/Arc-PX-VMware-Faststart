@@ -6,8 +6,12 @@ module "arc_ds_controller" {
   metrics_ui_admin_password = var.metrics_ui_admin_password
   logs_ui_admin_user        = var.logs_ui_admin_user
   logs_ui_admin_password    = var.logs_ui_admin_password
+  namespace                 = var.namespace
+  service_type              = var.service_type
   subscription_id           = var.subscription_id
+  resource_group            = var.resource_group
   azure_region              = var.azure_region
+  connection_mode           = var.connection_mode
   data_storage_class        = var.data_storage_class
   logs_storage_class        = var.logs_storage_class
 }

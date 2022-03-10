@@ -8,9 +8,7 @@ metadata:
   namespace: ${var.namespace}
 YAML
 
-  depends_on = [
-    kubernetes_namespace.controller_namespace
-  ]
+  depends_on = [ kubernetes_namespace.controller_namespace ]
 }
 
 resource "kubectl_manifest" "role_bootstrapper" {
@@ -36,9 +34,7 @@ rules:
   verbs: ["*"]
 YAML
 
-  depends_on = [
-    kubectl_manifest.sa_arc_bootstrapper
-  ]
+  depends_on = [ kubectl_manifest.sa_arc_bootstrapper ]
 }
 
 resource "kubectl_manifest" "rb_bootstrapper" {
@@ -58,9 +54,7 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 YAML
 
-  depends_on = [
-    kubectl_manifest.role_bootstrapper
-  ]
+  depends_on = [ kubectl_manifest.role_bootstrapper ]
 }
 
 resource "kubectl_manifest" "bootstrapper" {
@@ -86,13 +80,13 @@ spec:
       serviceAccountName: sa-arc-bootstrapper
       securityContext:
         fsGroup: 1000700001
-      nodeSelector:
-        kubernetes.io/os: linux
       imagePullSecrets:
       - name: arc-private-registry
+      nodeSelector:
+        kubernetes.io/os: linux
       containers:
       - name: bootstrapper
-        image: mcr.microsoft.com/arcdata/arc-bootstrapper:v1.2.0_2021-12-15
+        image: mcr.microsoft.com/arcdata/arc-bootstrapper:v1.4.0_2022-02-25
         imagePullPolicy: Always
         resources:
           limits:
@@ -103,9 +97,8 @@ spec:
             memory: 100Mi
         securityContext:
           runAsUser: 1000700001
+          runAsGroup: 1000700001
 YAML
 
-  depends_on = [
-    kubectl_manifest.rb_bootstrapper
-  ]
+  depends_on = [ kubectl_manifest.rb_bootstrapper ]
 }

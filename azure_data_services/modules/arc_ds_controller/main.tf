@@ -22,14 +22,13 @@ resource "kubernetes_namespace" "controller_namespace" {
     name = var.namespace
   }
 
-  depends_on = [
-     kubectl_manifest.data_controller_crd
-    ,kubectl_manifest.postgres_crd
-    ,kubectl_manifest.sqlmi_crd
-    ,kubectl_manifest.sql_restore_crd
-    ,kubectl_manifest.export_tasks_crd
-    ,kubectl_manifest.monitors_crd
-    ,kubectl_manifest.dags_crd
-    ,kubectl_manifest.adc_crd
-  ]
+  depends_on = [  kubectl_manifest.datacontrollers
+                 ,kubectl_manifest.postgresqls
+                 ,kubectl_manifest.sqlmanagedinstances
+                 ,kubectl_manifest.sqlmanagedinstancerestoretasks
+                 ,kubectl_manifest.exporttasks
+                 ,kubectl_manifest.monitors
+                 ,kubectl_manifest.dags
+                 ,kubectl_manifest.activedirectoryconnectors
+               ]
 }

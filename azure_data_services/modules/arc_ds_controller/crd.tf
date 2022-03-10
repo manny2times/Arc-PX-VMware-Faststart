@@ -1,4 +1,4 @@
-resource "kubectl_manifest" "data_controller_crd" {
+resource "kubectl_manifest" "datacontrollers" {
   wait = true
   yaml_body = <<YAML
 apiVersion: apiextensions.k8s.io/v1
@@ -36,6 +36,19 @@ spec:
       jsonPath: .status.state
   - name: v2
     served: true
+    storage: false
+    schema:
+      openAPIV3Schema:
+        type: object
+        x-kubernetes-preserve-unknown-fields: true
+    subresources:
+      status: {}
+    additionalPrinterColumns:
+    - name: State
+      type: string
+      jsonPath: .status.state
+  - name: v3
+    served: true
     storage: true
     schema:
       openAPIV3Schema:
@@ -56,7 +69,7 @@ spec:
 YAML
 }
 
-resource "kubectl_manifest" "postgres_crd" {
+resource "kubectl_manifest" "postgresqls" {
   wait = true
   yaml_body = <<YAML
 apiVersion: apiextensions.k8s.io/v1
@@ -121,7 +134,7 @@ spec:
 YAML
 }
 
-resource "kubectl_manifest" "sqlmi_crd" {
+resource "kubectl_manifest" "sqlmanagedinstances" {
   wait = true
   yaml_body = <<YAML
 apiVersion: apiextensions.k8s.io/v1
@@ -177,7 +190,7 @@ spec:
       jsonPath: ".metadata.creationTimestamp"
   - name: v2
     served: true
-    storage: true
+    storage: false
     schema:
       openAPIV3Schema:
         type: object
@@ -197,6 +210,50 @@ spec:
     - name: Age
       type: date
       jsonPath: ".metadata.creationTimestamp"
+  - name: v3
+    served: true
+    storage: false
+    schema:
+      openAPIV3Schema:
+        type: object
+        x-kubernetes-preserve-unknown-fields: true
+    subresources:
+      status: {}
+    additionalPrinterColumns:
+    - name: Status
+      type: string
+      jsonPath: ".status.state"
+    - name: Replicas
+      type: string
+      jsonPath: ".status.readyReplicas"
+    - name: Primary-Endpoint
+      type: string
+      jsonPath: ".status.primaryEndpoint"
+    - name: Age
+      type: date
+      jsonPath: ".metadata.creationTimestamp"
+  - name: v4
+    served: true
+    storage: true
+    schema:
+      openAPIV3Schema:
+        type: object
+        x-kubernetes-preserve-unknown-fields: true
+    subresources:
+      status: {}
+    additionalPrinterColumns:
+    - name: Status
+      type: string
+      jsonPath: ".status.state"
+    - name: Replicas
+      type: string
+      jsonPath: ".status.roles.sql.readyReplicas"
+    - name: Primary-Endpoint
+      type: string
+      jsonPath: ".status.endpoints.primary"
+    - name: Age
+      type: date
+      jsonPath: ".metadata.creationTimestamp"
   conversion:
     strategy: None
   names:
@@ -208,7 +265,7 @@ spec:
 YAML
 }
 
-resource "kubectl_manifest" "sql_restore_crd" {
+resource "kubectl_manifest" "sqlmanagedinstancerestoretasks" {
   wait = true
   yaml_body = <<YAML
 apiVersion: apiextensions.k8s.io/v1
@@ -262,7 +319,7 @@ spec:
 YAML
 }
 
-resource "kubectl_manifest" "export_tasks_crd" {
+resource "kubectl_manifest" "exporttasks" {
   wait = true
   yaml_body = <<YAML
 apiVersion: apiextensions.k8s.io/v1
@@ -332,7 +389,7 @@ spec:
 YAML
 }
 
-resource "kubectl_manifest" "monitors_crd" {
+resource "kubectl_manifest" "monitors" {
   wait = true
   yaml_body = <<YAML
 apiVersion: apiextensions.k8s.io/v1
@@ -401,7 +458,7 @@ spec:
 YAML
 }
 
-resource "kubectl_manifest" "dags_crd" {
+resource "kubectl_manifest" "dags" {
   wait = true
   yaml_body = <<YAML
 apiVersion: apiextensions.k8s.io/v1
@@ -426,6 +483,9 @@ spec:
       type: string
     - jsonPath: .status.results
       name: Results
+      type: string
+    - jsonPath: .status.role
+      name: Role
       type: string
     - jsonPath: .metadata.creationTimestamp
       name: Age
@@ -461,7 +521,7 @@ spec:
 YAML
 }
 
-resource "kubectl_manifest" "adc_crd" {
+resource "kubectl_manifest" "activedirectoryconnectors" {
   wait = true
   yaml_body = <<YAML
 apiVersion: apiextensions.k8s.io/v1

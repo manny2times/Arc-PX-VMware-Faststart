@@ -7,28 +7,24 @@ metadata:
   name: sa-arc-controller
 YAML
 
-  depends_on = [
-    kubectl_manifest.sa_arc_webhook_job
-  ]
+  depends_on = [ kubectl_manifest.sa_arc_webhook_job ]
 }
 
 resource "time_sleep" "wait_5_seconds" {
   create_duration = "5s"
 
-  depends_on = [
-    kubectl_manifest.sa_arc_controller
-  ]
+  depends_on = [ kubectl_manifest.sa_arc_controller ]
 }
 
 resource "kubectl_manifest" "arc_dc" {
   wait = true
   yaml_body = <<YAML
-apiVersion: arcdata.microsoft.com/v2
+apiVersion: arcdata.microsoft.com/v3
 kind: DataController
 metadata:
-  namespace: ${var.namespace} 
   generation: 1
   name: arc-dc
+  namespace: ${var.namespace}
 spec:
   credentials:
     controllerAdmin: controller-login-secret
@@ -36,7 +32,7 @@ spec:
     serviceAccount: sa-arc-controller
   docker:
     imagePullPolicy: Always
-    imageTag: ${var.image_tag} 
+    imageTag: v1.4.0_2022-02-25
     registry: mcr.microsoft.com
     repository: arcdata
   infrastructure: ${var.infrastructure} 
@@ -58,7 +54,7 @@ spec:
       subscription: ${var.subscription_id} 
     controller:
       displayName: arc-dc
-      enableBilling: "True"
+      enableBilling: true
       logs.rotation.days: "7"
       logs.rotation.size: "5000"
   storage:
@@ -76,3 +72,4 @@ YAML
     time_sleep.wait_5_seconds 
   ]
 }
+

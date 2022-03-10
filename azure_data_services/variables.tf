@@ -95,7 +95,7 @@ variable "memory_limit" {
 
 variable "service_type" {
   type    = string
-  default = "NodePort"
+  default = "LoadBalancer"
 }
 
 variable "backups_storage_class" {
