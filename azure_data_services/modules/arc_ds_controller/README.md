@@ -1,9 +1,6 @@
 # Overview
 
-This module:
-- Creates an Azure service principal and role assignment for the Azure Arc Enabled Data Service controller
-- Deploys a controller via calls to the azdata CLI, if a configuration directory already exists with the same name as that specified by the arc_data_profile_dir 
-  varaible, the module will rename the current profile directory by appending the date and time to the end of its name
+This module deploys a controller using the kubectl_manifest provider for the February 2022 Azure Arc enabled Data Services release.
 
 # Usage
 
