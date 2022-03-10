@@ -8,7 +8,7 @@ This module deploys a controller using the kubectl_manifest provider for the Feb
 
 Execute the following command from the `Arc-PX-VMware-Faststart/azure_data_services` directory
 ```
-terraform apply -target=module.azure_arc_ds_controller --auto-approve 
+terraform apply -target=module.arc_ds_controller --auto-approve 
 ```
 
 ## Destroy
