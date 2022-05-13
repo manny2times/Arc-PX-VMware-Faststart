@@ -17,7 +17,7 @@ provider "azurerm" {
 }
 
 provider "azuread" {
-  tenant_id = "5a3d1859-f4b7-4151-beae-773895b989fd"
+  tenant_id = "1a2b3456-c7d8-9123-efgh-456789i123jk"
 }
 
 module "azure_blob_storage" {
