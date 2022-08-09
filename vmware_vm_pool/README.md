@@ -196,7 +196,7 @@ network:
 
 33. Remove the NIC config for the virtual machine template, log into the template virtual machine:
 
-`sudo mv /etc/newtplan/00-installer-config.yaml ~/.`
+`sudo mv /etc/netplan/00-installer-config.yaml ~/.`
 
 34. Shutdown the template virtual machine:
 
